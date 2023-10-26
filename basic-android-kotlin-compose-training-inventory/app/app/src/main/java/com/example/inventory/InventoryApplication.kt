@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.inventory.data
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+package com.example.inventory
 
-/**
- * Entity data class represents a single row in the database.
- */
-@Entity(tableName = "items")
-class Item(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val name: String,
-    val price: Double,
-    val quantity: Int
-)
+import android.app.Application
+import com.example.inventory.data.AppContainer
+import com.example.inventory.data.AppDataContainer
+
+class InventoryApplication : Application() {
+
+    /**
+     * AppContainer instance used by the rest of classes to obtain dependencies
+     */
+    lateinit var container: AppContainer
+
+    override fun onCreate() {
+        super.onCreate()
+        container = AppDataContainer(this)
+    }
+}
